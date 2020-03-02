@@ -1,0 +1,1 @@
+stride_size=1
