@@ -34,4 +34,4 @@ class model_tools:
         return tf.nn.relu(layer)
 
     def op_regression_layer(self,layer):
-        return 0
+        return tf.nn.sigmoid(layer)

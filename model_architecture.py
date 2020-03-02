@@ -4,7 +4,6 @@ from build_tools import model_tools
 
 model=model_tools()
 
-
 def create_network(input_placeholder,output_placeholder):
 
     network = model.conv_layer(input_placeholder,3,1,16)
@@ -36,14 +35,18 @@ def create_network(input_placeholder,output_placeholder):
     network,features = model.flattening_layer(network)
     print(network)
     network = model.fully_connected_layer(network,features,1024)
+    network = model.activation(network)
     print(network)
 
     network = model.fully_connected_layer(network,1024,512)
+    network = model.activation(network)
     print(network)
 
     network = model.fully_connected_layer(network,512,1)
+    #network = model.op_regression_layer(network)
+
     print(network)
-    
+
     return network
 
 
