@@ -4,8 +4,10 @@ import json
 import random
 from config import *
 import numpy as np
-dataset='datasets\\UTKFace\\'
-destination='datasets\\fomatted\\'
+
+dataset='datasets\\train_set\\'
+destination='datasets\\fomatted\\train\\'
+train_folder = destination
 
 if not os.path.exists(destination):
     os.makedirs(destination)
@@ -13,74 +15,52 @@ if not os.path.exists(destination):
 class utils:
 
     def __init__(self):
-
-        with open('datasets\\train_labels.json','r') as fi:
-            read_data = json.load(fi)
-        self.data = read_data
+        self.data = 0
         self.data_copy = self.data
 
     def state_restore(self):
         self.data = self.data_copy
 
-    def check_data_dis(self):
-        with open('datasets\\labels.json','r') as fi:
-            read_data = json.load(fi)
-        for i in read_data.keys():
-            print(len(read_data[i]))
-
-
     def create_dataset(self,dataset,destination,dim):
-        age_dict={}
-        for i,j in enumerate(os.listdir(dataset)):
-            age=j[-6:-4]
-            im=cv2.imread(dataset+j,0)
-            im=cv2.resize(im,(dim,dim))
-            cv2.imwrite(os.path.join(destination,str(i)+'.jpg'),im)
-            if str(age) not in age_dict.keys():
-                age_dict[str(age)]=[]
-            age_dict[str(age)].append(str(i)+'.jpg')
+        for i in range(344):
+            try:
+                if not os.path.exists(destination+'\\{}'.format(i)):
+                    os.makedirs(destination+'\\{}'.format(i))
+                seq_name = destination+'\\{}'.format(i)
+                for j in range(time):
+                    im_name = 'set{}_{}.jpeg'.format(i+1,j+1)
+                    im=cv2.imread(dataset+im_name)
+                    im=cv2.resize(im,(dim,dim))
+                    cv2.imwrite(os.path.join(seq_name,str(j)+'.jpg'),im)
+            except Exception as e:
+                print(e)
+                continue
 
-        with open('datasets\\labels.json','w') as fi:
-            json.dump(age_dict,fi)
-    
-    def process_dataset(self):
-        with open('datasets\\labels.json','r') as fi:
-            read_data = json.load(fi)
-        l=[]
-        for i in read_data:
-            for j in read_data[i]:
-                l.append([i,j])
-
-        _testlen=int(len(l)//10)
-        random.shuffle(l)
-        train_set = l[:len(l)-_testlen]
-        test_set = l[len(train_set):]
-        print(len(train_set),len(test_set))
-        with open('datasets\\train_labels.json','w') as fi:
-            json.dump(train_set,fi)
-        with open('datasets\\test_labels.json','w') as fi:
-            json.dump(test_set,fi)
-
-    def get_images(self,image_names):
-        all_images=[]
-        for i in image_names:
-            img = cv2.imread(os.path.join(image_path,i),0)
-            img = img.reshape(50,50,1)
-            all_images.append(img)
-
-        return all_images
+    def get_sequence(self,seq_names):
+        seq =[]
+        for i in seq_names:
+            images = []
+            for j in os.listdir(train_folder+i):
+                print(os.path.join(train_folder+i,j))
+                im=cv2.imread(os.path.join(train_folder+i,j),0)
+                images.append(im)
+            seq.append(images[:])
+        return np.array(seq[:])
 
     def batch_dispatch(self,batch_size):
         start_index = 0
         end_index = batch_size
-        while end_index < len(self.data):
-            data = self.data[start_index:end_index]
-            ages,im_names = zip(*data)
-            images = self.get_images(im_names)
-            ages = np.array(list(map(int, ages))).reshape(batch_size,1)
+        train_data = os.listdir(train_folder)
+
+        while end_index < len(train_data):
+            batch_seq = train_data[start_index:end_index]
+            print(batch_seq)
+            image_seqs = self.get_sequence(batch_seq)
+            print('printing here',image_seqs, image_seqs.shape)
+            image_seqs = image_seqs.reshape((batch_size,time,height,width,color_channels))
+            #print('printing here',image_seqs, image_seqs.shape)
             start_index,end_index = end_index, end_index + batch_size
-            yield[np.array(images),np.array(ages)]
+            labels = np.eye(n_classes)[np.random.choice(n_classes, batch_size)]
+            yield[image_seqs,labels]
 
-
-#u=utils()
 #print(u.check_data_dis())

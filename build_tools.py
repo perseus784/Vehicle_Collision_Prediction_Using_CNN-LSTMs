@@ -9,10 +9,10 @@ class model_tools:
     def add_biases(self,shape):
         return tf.Variable(tf.constant(0.05, shape=shape))
 
-    def conv_layer(self,layer,kernel_size,input_shape,output_shape):
+    def conv_layer(self,layer,kernel_size,input_shape,output_shape,stride_size):
         weights = self.add_weights([kernel_size, kernel_size, kernel_size, input_shape, output_shape])
         biases = self.add_biases([output_shape])
-        stride = [1, stride_size, stride_size, stride_size, 1]
+        stride = [1, 1, stride_size, stride_size, 1]
         return tf.nn.conv3d(layer, weights, strides=stride, padding='SAME') + biases
 
     def pooling_layer(self,layer,kernel_size,stride_size):
