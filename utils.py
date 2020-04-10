@@ -37,15 +37,20 @@ class utils:
                 continue
 
     def get_sequence(self,seq_names):
-        seq =[]
+        seq = []
         for i in seq_names:
             images = []
             for j in os.listdir(train_folder+i):
-                print(os.path.join(train_folder+i,j))
-                im=cv2.imread(os.path.join(train_folder+i,j),0)
-                images.append(im)
-            seq.append(images[:])
-        return np.array(seq[:])
+                im=cv2.imread(os.path.join(train_folder+i,j))
+                #print("found",i,j,os.path.join(train_folder+i,j))
+                if not os.path.isfile(os.path.join(train_folder+i,j)):
+                    print("not found",i,j)
+                images.append(im/255)
+            a = np.array(images) 
+            #print(a.shape)
+            seq.append(a)
+        print(seq[-1].shape)
+        return np.array(seq)
 
     def batch_dispatch(self,batch_size):
         start_index = 0
@@ -54,13 +59,15 @@ class utils:
 
         while end_index < len(train_data):
             batch_seq = train_data[start_index:end_index]
-            print(batch_seq)
             image_seqs = self.get_sequence(batch_seq)
-            print('printing here',image_seqs, image_seqs.shape)
-            image_seqs = image_seqs.reshape((batch_size,time,height,width,color_channels))
+            #print('printing here',image_seqs)
+            #image_seqs = image_seqs.reshape((batch_size,time,height,width,color_channels))
             #print('printing here',image_seqs, image_seqs.shape)
             start_index,end_index = end_index, end_index + batch_size
             labels = np.eye(n_classes)[np.random.choice(n_classes, batch_size)]
-            yield[image_seqs,labels]
+            yield image_seqs,labels
 
 #print(u.check_data_dis())
+u=utils()
+for i in u.batch_dispatch(32):
+    print('')

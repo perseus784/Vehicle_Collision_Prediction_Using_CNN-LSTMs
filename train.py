@@ -5,6 +5,7 @@ from build_tools import model_tools
 from tensorflow.python.client import device_lib
 from config import *
 import model_architecture as model
+import hybrid_net as hbn
 print(device_lib.list_local_devices())
 import statistics
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
@@ -15,10 +16,6 @@ image_placeholder = tf.placeholder(tf.float32,shape = [batch_size,time, height, 
 output_placeholder = tf.placeholder(tf.float32,shape = [batch_size,n_classes])
 tools = utils()
 
-def percent_error(inp,output):
-    s_accuracy = [list((abs(i-j)/i)*100)[0] for i,j in zip(inp,output)]
-    accuracy = statistics.mean(s_accuracy)
-    return s_accuracy, accuracy
 
 def trainer(network):
     cross_entropy = tf.nn.softmax_cross_entropy_with_logits_v2(logits=network,labels=output_placeholder)
@@ -48,6 +45,10 @@ def trainer(network):
                 summary = tf.Summary(value=[tf.Summary.Value(tag="actual loss", simple_value=_loss)])
                 writer.add_summary(summary,counter)
 
-network = model.create_network(image_placeholder)
-print(network)
-trainer(network)
+def _trainer(network):
+    network.compile(optimizer = 'adam', loss= 'binary_crossentropy',metrics = ['accuracy'])
+    batch_generator = tools.batch_dispatch(batch_size)
+    network.fit_generator(batch_generator,epochs=epochs,steps_per_epoch=344 // batch_size)
+
+network = hbn.create_network(image_placeholder)
+_trainer(network)
