@@ -4,67 +4,31 @@ import json
 import random
 from config import *
 import numpy as np
+import h5py
 
-dataset='datasets\\train_set\\'
-destination='datasets\\fomatted\\train\\'
-train_folder = destination
-
-if not os.path.exists(destination):
-    os.makedirs(destination)
+train_folder = os.path.join('datasets','train_set')
+test_folder = os.path.join('datasets','test_set')
 
 class utils:
 
     def __init__(self):
-        self.data = 0
-        self.data_copy = self.data
-
-    def state_restore(self):
-        self.data = self.data_copy
-
-    def create_dataset(self,dataset,destination,dim):
-        for i in range(344):
-            try:
-                if not os.path.exists(destination+'\\{}'.format(i)):
-                    os.makedirs(destination+'\\{}'.format(i))
-                seq_name = destination+'\\{}'.format(i)
-                for j in range(time):
-                    im_name = 'set{}_{}.jpeg'.format(i+1,j+1)
-                    im=cv2.imread(dataset+im_name)
-                    im=cv2.resize(im,(dim,dim))
-                    cv2.imwrite(os.path.join(seq_name,str(j)+'.jpg'),im)
-            except Exception as e:
-                print(e)
-                continue
-
-    def get_sequence(self,seq_names):
-        seq = []
-        for i in seq_names:
-            images = []
-            for j in os.listdir(train_folder+i):
-                im=cv2.imread(os.path.join(train_folder+i,j))
-                #print("found",i,j,os.path.join(train_folder+i,j))
-                if not os.path.isfile(os.path.join(train_folder+i,j)):
-                    print("not found",i,j)
-                images.append(im/255)
-            a = np.array(images) 
-            #print(a.shape)
-            seq.append(a)
-        print(seq[-1].shape)
-        return np.array(seq)
+        self.train_files = os.listdir(train_folder)
+        self.test_files = os.listdir(test_folder)
+            
+    def get_sequence(self):
+        return 0
 
     def batch_dispatch(self,batch_size):
         start_index = 0
         end_index = batch_size
         train_data = os.listdir(train_folder)
 
-        while end_index < len(train_data):
-            batch_seq = train_data[start_index:end_index]
-            image_seqs = self.get_sequence(batch_seq)
+        while flag:
+            image_seqs, labels, flag = self.get_sequence()
             #print('printing here',image_seqs)
             #image_seqs = image_seqs.reshape((batch_size,time,height,width,color_channels))
-            #print('printing here',image_seqs, image_seqs.shape)
-            start_index,end_index = end_index, end_index + batch_size
-            labels = np.eye(n_classes)[np.random.choice(n_classes, batch_size)]
+            print('printing here', image_seqs.shape)
+            #labels = np.eye(n_classes)[np.random.choice(n_classes, batch_size)]
             yield image_seqs,labels
 
 #print(u.check_data_dis())
