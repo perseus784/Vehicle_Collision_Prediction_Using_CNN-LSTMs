@@ -6,7 +6,7 @@ from tensorflow.python.client import device_lib
 from config import *
 import model_architecture as model
 import hybrid_net as hbn
-print(device_lib.list_local_devices())
+#print(device_lib.list_local_devices())
 import statistics
 os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 
@@ -48,7 +48,7 @@ def trainer(network):
 def _trainer(network):
     network.compile(optimizer = 'adam', loss= 'binary_crossentropy',metrics = ['accuracy'])
     batch_generator = tools.batch_dispatch(batch_size)
-    network.fit_generator(batch_generator,epochs=epochs,steps_per_epoch=344 // batch_size)
+    network.fit_generator(batch_generator,epochs=epochs,steps_per_epoch=len(os.listdir(train_folder)) // batch_size)
 
 network = hbn.create_network(image_placeholder)
 _trainer(network)

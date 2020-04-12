@@ -1,19 +1,13 @@
 import os
 
-height = 100
-width = 100
+height = 280
+width = 420
 color_channels = 3
 epochs = 10
-image_path = os.path.join("datasets","formatted")
-n_classes = 4
-vocabulary_size = 355
-embedding_layer_size= 48
-#slots =
-number_of_intents=4
-number_of_seqs=200001
-max_len = 20
-decoder_max_len=max_len
-number_of_epochs = 3
 number_of_hiddenunits = 40
 batch_size = 16
-time = 5
+time = 15
+n_classes = 2
+train_folder = os.path.join('datasets','train_set')
+test_folder = os.path.join('datasets','test_set')
+valid_folder = os.path.join('datasets','valid_set')

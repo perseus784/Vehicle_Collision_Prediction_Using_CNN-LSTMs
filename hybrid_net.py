@@ -69,11 +69,11 @@ def create_network(input_data_placeholder):
     decoder_network=model.decoder_intent(encoder_finalstates.h,w,b)
     return decoder_network'''
 
-
-image_placeholder = tf.placeholder(tf.float32, shape = [time,height,width,color_channels])
+'''
+image_placeholder = tf.placeholder(tf.float32, shape = [None,time,height,width,color_channels])
 
 hyb_network = create_network(image_placeholder)
-print(hyb_network)
+print(hyb_network)'''
 
 '''
 summary_writer = tf.summary.FileWriter(logdir='summary_tf')
