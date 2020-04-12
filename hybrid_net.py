@@ -49,7 +49,7 @@ def create_network(input_data_placeholder):
     conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Flatten()))
     #image_features = model.embed_conv(conv_model)
 
-    conv_model.add(tf.keras.layers.(tf.keras.layers.LSTM(number_of_hiddenunits, return_sequences=False)))
+    conv_model.add(tf.keras.layers.RNN(tf.keras.layers.LSTM(number_of_hiddenunits, return_sequences=False),return_sequences=False))
     conv_model.add(tf.keras.layers.Dense(16))
     conv_model.add(tf.keras.layers.Dense(2))
     conv_model.add(tf.keras.layers.Activation('softmax'))
