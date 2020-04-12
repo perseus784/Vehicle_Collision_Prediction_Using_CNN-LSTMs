@@ -9,7 +9,9 @@ datasets/
 check_files/
 check_files/*
 formatted/
+summary_tf/*
 summary_tf/
+
 *.pyc
 *.json
 __pycache__/
