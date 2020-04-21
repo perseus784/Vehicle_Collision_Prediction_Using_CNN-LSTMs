@@ -38,23 +38,41 @@ def do_conv(input_placeholder):
 
     return conv_model
 
-def create_network(input_data_placeholder):
+def create_network():
     conv_model = tf.keras.models.Sequential()
-
     conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(16, (3,3), padding='same', activation='relu'),input_shape =(time,height,width,color_channels) ))
-    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME')))
     conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization()))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME')))
+
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(32, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(32, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization()))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME')))   
+    
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(64, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(64, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization()))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME'))) 
+
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(128, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(256, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization()))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME'))) 
+
+    '''conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(256, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(512, (3,3), padding='same', activation='relu') ))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization()))
+    conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME')))'''
+
     #embedded
-
     conv_model.add(tf.keras.layers.TimeDistributed(tf.keras.layers.Flatten()))
+    
     #image_features = model.embed_conv(conv_model)
-
-    conv_model.add(tf.keras.layers.LSTM(number_of_hiddenunits, return_sequences=False))
+    conv_model.add(tf.keras.layers.LSTM(10, return_sequences=False))
     conv_model.add(tf.keras.layers.Dense(16))
     conv_model.add(tf.keras.layers.Dense(2))
     conv_model.add(tf.keras.layers.Activation('softmax'))
     conv_model.summary()
-
     return conv_model
 
     '''
@@ -69,11 +87,11 @@ def create_network(input_data_placeholder):
     decoder_network=model.decoder_intent(encoder_finalstates.h,w,b)
     return decoder_network'''
 
-'''
+
 image_placeholder = tf.placeholder(tf.float32, shape = [None,time,height,width,color_channels])
 
-hyb_network = create_network(image_placeholder)
-print(hyb_network)'''
+hyb_network = create_network()
+print(hyb_network)
 
 '''
 summary_writer = tf.summary.FileWriter(logdir='summary_tf')

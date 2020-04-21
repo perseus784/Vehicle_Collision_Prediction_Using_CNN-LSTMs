@@ -48,6 +48,7 @@ class utils:
             image_seqs, labels = self.get_sequence(train_data[start_index:end_index])
             #image_seqs = image_seqs.reshape((batch_size,time,height,width,color_channels))
             #labels = np.eye(n_classes)[np.random.choice(n_classes, batch_size)]
+            
             start_index,end_index = end_index,end_index+batch_size
             yield image_seqs,labels
 
