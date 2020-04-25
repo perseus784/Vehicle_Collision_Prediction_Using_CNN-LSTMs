@@ -11,6 +11,8 @@ check_files/*
 formatted/
 summary_tf/*
 summary_tf/
+files/
+files/*
 *.pyc
 *.json
 __pycache__/
