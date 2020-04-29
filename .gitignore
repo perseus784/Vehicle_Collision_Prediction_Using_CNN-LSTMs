@@ -4,8 +4,8 @@ mapscache/*
 env/*
 venv/*
 archive/
-datasets/*
-datasets/
+datasets_h5/*
+datasets_h5/
 check_files/
 check_files/*
 formatted/
@@ -25,7 +25,7 @@ __pycache__/
 .idea/
 # C extensions
 *.so
-
+*.avi
 # Distribution / packaging
 .Python
 build/

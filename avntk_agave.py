@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 import os,random
+os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 import tensorflow as tf
-#import cv2
+import cv2
 import numpy as np
 import json
 import shutil
+from collections import deque
 
 tf.reset_default_graph()
 tf.set_random_seed(0)
@@ -21,7 +23,7 @@ valid_folder = os.path.join(data_path,'valid_set')
 model_name = 'vgg'
 model_save_folder = os.path.join(base_folder,'files',model_name,'model_folder')
 tensorboard_save_folder = os.path.join(base_folder,'files',model_name,'tensorboard_folder')
-
+'''
 if not os.path.exists(model_save_folder):
     os.makedirs(model_save_folder)
 else:
@@ -33,7 +35,7 @@ if not os.path.exists(tensorboard_save_folder):
 else:
     shutil.rmtree(tensorboard_save_folder)
     os.makedirs(tensorboard_save_folder)
-
+'''
 epochs = 50
 time = 8
 n_classes = 2
@@ -47,6 +49,8 @@ cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath=checkpoint_path, verbo
 tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=tensorboard_save_folder, histogram_freq=0, write_graph=True,
                                                       write_images=False)
 #update_freq='batch',profile_batch=2,embeddings_freq=0,embeddings_metadata=None
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+out = cv2.VideoWriter('out.avi',fourcc, 12.0, (210*4,140*4))
 
 def batch_dispatch(data_folder):
     _data = os.listdir(data_folder)
@@ -74,12 +78,13 @@ def get_valid_data(data_folder):
     _data = os.listdir(data_folder)
     random.shuffle(_data)
     counter = 0
-    it = int(batch_size/8)
+    it = 1 #int(batch_size/8)
 
     while counter<=len(_data):
         image_seqs=np.empty((0,time,height,width,color_channels))
         labels = np.empty((0,2))
         for i in range(it):
+            print(counter)
             np_data = np.load(os.path.join(data_folder,_data[counter]))
             image_seqs = np.vstack((image_seqs,np_data['name1']/255))
             labels = np.vstack((labels,np_data['name2']))
@@ -87,7 +92,8 @@ def get_valid_data(data_folder):
             image_seqs = np_data['name1']/255
             labels = np_data['name2']'''
             counter += 1
-        if counter<=len(_data):
+        
+        if counter>=len(_data):
             counter = 0
         yield image_seqs,labels
 
@@ -221,7 +227,40 @@ def _trainer(network):
     with open(os.path.join(base_folder,'files',model_name,'training_logs.json'),'w') as w:
         json.dump(history.history,w)
 
-model_tools = build_model()
-network = create_network(model_tools)
 
-_trainer(network)
+def inference(network,video_file):
+    image_seq = deque([],8)
+    cap = cv2.VideoCapture(video_file)
+    counter = 0 
+    stat = 'safe'
+    while (cap.isOpened()):
+        ret, frame = cap.read()
+        if ret:
+            _frame = cv2.resize(frame,(width,height))
+            image_seq.append(_frame)
+            if counter%2 == 0:
+                if len(image_seq)==8:
+                    np_image_seqs = np.reshape(np.array(image_seq)/255,(1,time,height,width,color_channels))
+                    r = network.predict(np_image_seqs)
+                    stat = ['safe', 'collision'][np.argmax(r,1)[0]]
+            
+            cv2.putText(frame,stat, (230,230), cv2.FONT_HERSHEY_SIMPLEX, 3, (0,255,0),3)
+            out.write(frame)
+            counter+=1
+            print (counter)
+        else:
+            cap.release()
+            out.release()
+            cv2.destroyAllWindows()
+
+
+if  __name__ == "__main__":
+    model_tools = build_model()
+    network = create_network(model_tools)
+    network.load_weights(os.path.join(model_save_folder,'model_weights_032.ckpt'))
+    inference(network,os.path.join(base_folder,'files','output.avi'))
+    '''test_generator = get_valid_data(test_folder)
+    for img_seq,labels in test_generator:
+        r = network.predict(img_seq)
+        print ('accuracy',np.count_nonzero(np.argmax(r,1)==np.argmax(labels,1))/8)'''
+    #_trainer(network)
