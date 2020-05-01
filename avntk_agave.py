@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os,random
-os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+#os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
 import tensorflow as tf
 import cv2
 import numpy as np
