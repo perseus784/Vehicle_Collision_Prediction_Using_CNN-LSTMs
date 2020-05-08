@@ -11,6 +11,8 @@ check_files/*
 formatted/
 summary_tf/*
 summary_tf/
+tensorboard_f
+tensorboard_f/*
 files/
 files/*
 *.pyc
