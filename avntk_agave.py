@@ -8,6 +8,8 @@ import numpy as np
 import json
 import shutil
 from collections import deque
+from model_architecture import build_tools
+from utils import data_tools
 
 tf.reset_default_graph()
 tf.set_random_seed(0)
@@ -103,9 +105,6 @@ class build_model:
         conv_model = tf.keras.layers.Concatenate(axis= 4)([conv_1,conv_3_2,conv_5_2,conv_pooling])
 
         return conv_model
-
-    def resnet_module(self):
-        pass
 
     def get_conv_vgg(self,input_batch):
 
@@ -244,8 +243,8 @@ def inference(network,video_file):
 
 if  __name__ == "__main__":
 
-    model_tools = build_model()
-    network = create_network(model_tools)
+    model_tools = build_tools()
+    network = model_tools.create_network(model_name)
 
     if mode == 'train':
         train_generator = data_tools(train_folder,'train')
