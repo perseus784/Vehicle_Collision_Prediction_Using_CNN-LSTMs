@@ -46,8 +46,10 @@ The aim of the project is to predict whether a vehicle is in a collision course 
 </p> 
 
 <p align="center">
-<img src="media/result1.gif" width="400" height="400">
-<img src="media/result2.gif" width="400" height="400">
-</p> 
+<img src="media/result1.gif" width="430" height="300">
+<img src="media/result2.gif" width="430" height="300">
+</p>  
+
+YouTube link: https://www.youtube.com/watch?v=5E20U7b_4zQ
 ## Lessons:
 * Something
