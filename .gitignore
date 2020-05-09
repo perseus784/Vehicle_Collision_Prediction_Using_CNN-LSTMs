@@ -22,6 +22,8 @@ __pycache__/*
 __pycache__  
 # Byte-compiled / optimized / DLL files
 __pycache__/
+.vscode/
+.vscode/
 *.py[cod]
 *$py.class
 .idea/
