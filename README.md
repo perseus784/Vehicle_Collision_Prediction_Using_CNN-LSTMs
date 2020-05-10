@@ -3,12 +3,9 @@
 ## About
 <img src="media/result1.gif" align="right" width="430" height="280"> 
 
-The aim of the project is to predict whether a vehicle is in a collision course using a series of images **moments before it happens.**     
+The aim of the project is to predict whether a vehicle is in a collision course using a series of images moments before it happens.  
 
-The project combines both CNNs and LSTMs to get time series prediction using image data. Various phases and challenges faced during this project is discussed. Addingthe time aspect to the images not only gives us a better understanding of the situation but it can
-give us better prediction ahead of time.
-The project can be divided into three stages:
-Collecting Data, Creating the appropriate Network Architecture and Training.
+The project combines both CNNs and LSTMs to get time series prediction using image data. Various phases and challenges faced during this project are discussed. Adding the time aspect to the images not only gives us a better understanding of the situation but it can give us better prediction ahead of time. The project can be divided into three stages: Collecting Data, Creating the appropriate Network Architecture and Training.
 
 
 ## Configuration
