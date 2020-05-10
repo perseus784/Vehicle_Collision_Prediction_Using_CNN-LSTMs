@@ -1,7 +1,7 @@
 # A View NOT to Kill
 
 ## About
-<img src="media/result1.gif" align="right" width="400" height="250"> 
+<img src="media/result1.gif" align="right" width="430" height="280"> 
 
 The aim of the project is to predict whether a vehicle is in a collision course using a series of images **moments before it happens.**     
 
@@ -36,14 +36,14 @@ available in Carla to make it robust across different
 conditions.
 
 ## Model Architecture
-<img align="right" src="media/CNN-LSTM.png" width="500" height="400">
+<img align="right" src="media/CNN-LSTM.png" width="380" height="270">
 we can use Convolutional Neural Networks. CNNs are proven to be the best method to extract spatial information. We are going to use some of the standard CNN architectures to extract the features from the image. So, for each image in the series we will get a feature vector of fixed size which can be passed into their respective LSTM time step cells. 
 
 Once these features are extracted in the form of embedding vectors which are of length M, all these images are passed into their respective LSTM cells in their timestep. Now these embedding are taken into the encoder and then passed to the fully connected layers which in turn learns the classification task.
 
 
 ## Final Architecture:
-<img align="right" src="media/final_Network_arch.png" width="450" height="850">
+<img align="right" src="media/final_Network_arch.png" width="350" height="680">
 
 ## Design Choice 
 
@@ -72,7 +72,7 @@ The figure shows the accuracy improvement over time and it can also be noted tha
 </p> 
 
 ## Results
-<img align="right" src="media/result2.gif" width="400" height="260">
+<img align="right" src="media/result2.gif" width="450" height="290">
 
 Multiple video clips of a vehicle driving around in Carla environment is given to the network and it performed extremely well. The prediction is dependent on the vehicle's speed and when an actual human drives a car, the speed varies dynamically while the train samples was collected by constant speed piloting. This has an effect on predicting the future by reducing the time before incident happens when the vehicle goes fast and it predicts well in advance if the vehicle is going slow. 
 
