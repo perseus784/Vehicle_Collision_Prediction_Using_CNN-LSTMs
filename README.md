@@ -3,7 +3,7 @@
 ## About
 <img src="media/result1.gif" align="right" width="430" height="280"> 
 
-The project combines both CNNs and LSTMs to predict whether a vehicle is in a collision course using a series of images moments before it happens. 
+The project combines CNNs and LSTMs to predict whether a vehicle is in a collision course using a series of images **moments before it happens.**
 
 ## Configuration
 * Python 3.7
@@ -43,9 +43,9 @@ The project combines both CNNs and LSTMs to predict whether a vehicle is in a co
 </p> 
 
 ## How to Run
-<img align="right" src="media/outcomedrawio.png" width="300" height="250">
+<img align="right" src="media/outcomedrawio.png" width="350" height="270">
 
-* Collect data.[Autopilot script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_autopilot.py) , [Random collision maker script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_make_collisions.py).
+* Collect data using [Autopilot script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_autopilot.py) , [Random collision maker script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_make_collisions.py).
 * Get the data in particular format required by the network and Put the files in the respective folders.
 * Modify the configuration to your needs. 
 * Modify the network if required. **Exercise Caution!!**
@@ -53,8 +53,9 @@ The project combines both CNNs and LSTMs to predict whether a vehicle is in a co
 * See Use the best model created to test on a given video in **inference mode** by running the same script.
 
 ## Results
+<img align="right" src="media/result2.gif" width="450" height="290">  
+
 Ultimately, the system should be supplied with the video feed and we will be seeing a safety level for the given series of images. So for every moment in time, a safety flag is obtained. This can not only be employed in a self-driving car’s decision making system but also a manual car’s emergency protocol system to prevent extreme events. The core of the project is to extract the Spatio-Temporal information and use it to understand our environment better for risk prediction, context understanding, action recognition, scene understanding and forecasting etc.
-<img align="right" src="media/result2.gif" width="450" height="290">
 
 *Full Video: https://www.youtube.com/watch?v=5E20U7b_4zQ* 
 
