@@ -76,7 +76,6 @@ class Carla_session:
         #self.collision_sensor.listen(lambda collision: self.end_seq(collision,'collision'))  
 
         #self.lane_invasion_sensor.listen(lambda lane_inv: self.end_seq(lane_inv,'crossed lane'))
-        time.sleep(5)
 
     def start_new_seq(self):
         
@@ -135,7 +134,7 @@ class Carla_session:
         return carla.VehicleControl(thr,steer)  
        
     def drive_around(self,episodes):
-        #self.add_vehicles()
+        self.add_vehicles()
         try:
             self.start_new_seq()
         except:
