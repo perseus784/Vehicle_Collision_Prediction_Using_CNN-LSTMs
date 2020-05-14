@@ -7,10 +7,11 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 
 ## Configuration
 * Python 3.7
-* TensorFlow 1.14
-* Carla 0.9.5  
+* CUDA 10, CudNN 7
+* TensorFlow 1.14 
+* Carla 0.9.5[About Carla](https://carla.org/)[Documentation and API usage](https://carla.readthedocs.io/en/latest/) 
 
-***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project***  
+***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***  
 
 ## Data Collection 
 <img align="right" src="media/dataset_structure.png" width="300" height="200">
@@ -20,6 +21,9 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 * Collecting images while making accidents were a little more challenging, carla has inbuilt accident sensors which can be leveraged to record and take only the last 8 images before the incident. The images were taken in a particular frame rate and sampling to have more variance in the series of images. [Random collision maker script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_make_collisions.py).
 * The collected images were hard to handle because of the number of files and data size. So, the images are batched in numpy arrays of 8 and stored in seperate files. This reduced the number of files and made batching process easy. The final data if 8 GB in size.
 
+* Download and extract [this](https://drive.google.com/drive/folders/1Knt_km3kCEIZaxp_qXG60l5-UWe4G2QQ?usp=sharing) folder in current directory inside a directory named "files" to access the models, tensorboard summaries and a sample of the dataset.
+
+* Entire dataset can be downloaded [here](https://drive.google.com/drive/folders/1XQNXqmRRU8c4qxhwZFEq5fOburvWgTNm?usp=sharing)(8 GB).
 
 ## Model Architecture
 <img align="right" src="media/final_Network_arch.png" width="300" height="420"> 
@@ -55,12 +59,15 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 ## Results
 <img align="right" src="media/result2.gif" width="450" height="290">  
 
-Ultimately, the system should be supplied with the video feed and we will be seeing a safety level for the given series of images. So for every moment in time, a safety flag is obtained. This can not only be employed in a self-driving car’s decision making system but also a manual car’s emergency protocol system to prevent extreme events. The core of the project is to extract the Spatio-Temporal information and use it to understand our environment better for risk prediction, context understanding, action recognition, scene understanding and forecasting etc.
+Ultimately, the system should be supplied with the video feed and we will be seeing a safety level for the given series of images. So for every moment in time, a safety flag is obtained. This can not only be employed in a self-driving car’s decision making system but also a manual car’s emergency protocol system to prevent extreme events. 
+
+
+The core of the project is to extract the Spatio-Temporal information and use it to understand our environment better for risk prediction, context understanding, action recognition, scene understanding and forecasting etc.
 
 *Full Video: https://www.youtube.com/watch?v=5E20U7b_4zQ* 
 
-***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project***
+***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***
 
 Please raise an issue or contact me if you have any doubts.
 
-*Please Star if you like the project!*
+***Please Star if you like the project!***
