@@ -9,7 +9,8 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 * Python 3.7
 * CUDA 10, CudNN 7
 * TensorFlow 1.14 
-* Carla 0.9.5[About Carla](https://carla.org/)[Documentation and API usage](https://carla.readthedocs.io/en/latest/) 
+* Carla 0.9.5 [[About Carla]](https://carla.org/)
+* [Carla Documentation and API usage](https://carla.readthedocs.io/en/latest/) 
 
 ***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***  
 
