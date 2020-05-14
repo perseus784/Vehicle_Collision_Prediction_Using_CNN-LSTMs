@@ -49,7 +49,7 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 
 ## How to Run
 <img align="right" src="media/outcomedrawio.png" width="350" height="270">
-
+* Refer [Configuration](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/config.py).
 * Collect data using [Autopilot script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_autopilot.py) , [Random collision maker script](https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs/blob/master/collect_data_make_collisions.py).
 * Get the data in particular format required by the network and Put the files in the respective folders.
 * Modify the configuration to your needs. 
