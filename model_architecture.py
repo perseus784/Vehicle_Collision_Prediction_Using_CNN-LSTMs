@@ -28,30 +28,18 @@ class build_tools:
 
     def get_conv_vgg(self,input_batch):
 
-        '''conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(32, (3,3), padding='same', activation='relu'))(input_batch)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)'''
-
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(64, (3,3), padding='same', activation='relu') )(input_batch)
-        #conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(64, (3,3), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME',strides=(2,2)))(conv_model)
 
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(128, (3,3), padding='same', activation='relu') )(conv_model)
-        #conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(128, (3,3), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME',strides=(2,2)))(conv_model)
 
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(256, (3,3), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(256, (3,3), padding='same', activation='relu') )(conv_model)
-        #conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(256, (3,3), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME',strides=(2,2)))(conv_model)
-
-        '''conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(512, (3,3), padding='same', activation='relu') )(conv_model)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(512, (3,3), padding='same', activation='relu') )(conv_model)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(512, (3,3), padding='same', activation='relu') )(conv_model)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(2,2), padding='SAME',strides=(2,2)))(conv_model)'''
 
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(512, (3,3), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(512, (3,3), padding='same', activation='relu') )(conv_model)
@@ -61,11 +49,6 @@ class build_tools:
 
         #embedded
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Flatten())(conv_model)
-        '''conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Dense(1024,activation='relu'))(conv_model)'''
-        #conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
-        #conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Dropout(0.5))(conv_model)
-        '''conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Dense(1024,activation='relu'))(conv_model)'''
 
         return conv_model
 
@@ -74,23 +57,16 @@ class build_tools:
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(64, (7,7), padding='same', activation='relu') )(input_batch)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(3,3), padding='SAME',strides=(2,2)))(conv_model)
-        #conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(64, (1,1), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Conv2D(192, (3,3), padding='same', activation='relu') )(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(3,3), padding='SAME',strides=(2,2)))(conv_model) 
-        #conv_model = self.inception_module(conv_model,64,96,128,16,32,32)
+
         conv_model = self.inception_module(conv_model,128,128,192,32,96,64)
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(3,3), padding='SAME',strides=(2,2)))(conv_model) 
-        #conv_model = self.inception_module(conv_model,192,96,208,16,48,64)
-        #conv_model = self.inception_module(conv_model,160,112,224,24,64,64)
-        '''conv_model = self.inception_module(conv_model,128,128,256,24,64,64)
-        conv_model = self.inception_module(conv_model,112,144,288,32,64,64)'''
+
         conv_model = self.inception_module(conv_model,256,160,320,32,128,128)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(3,3), padding='SAME',strides=(2,2)))(conv_model) 
-        #conv_model = self.inception_module(conv_model,256,160,320,32,128,128)
-        '''conv_model = self.inception_module(conv_model,384,192,384,48,128,128)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.BatchNormalization())(conv_model)
-        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.AveragePooling2D(pool_size=(7,7), padding='SAME',strides=(1,1)))(conv_model) '''
+        conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.MaxPool2D(pool_size=(3,3), padding='SAME',strides=(2,2)))(conv_model)
+
         conv_model = tf.keras.layers.TimeDistributed(tf.keras.layers.Flatten())(conv_model)
         return conv_model
 
@@ -114,12 +90,7 @@ class build_tools:
             image_features = self.get_conv_inception(input_batch)
             lstm_network = tf.keras.layers.LSTM(number_of_hiddenunits, return_sequences=True,dropout=0.5,recurrent_dropout=0.5)(image_features)
             lstm_network = tf.keras.layers.LSTM(number_of_hiddenunits, return_sequences=False,dropout=0.5,recurrent_dropout=0.5)(lstm_network)
-            '''lstm_network = tf.keras.layers.Dense(1024,activation='relu')(lstm_network)
-            lstm_network = tf.keras.layers.BatchNormalization()(lstm_network)
-            #lstm_network = tf.keras.layers.Dropout(0.5)(lstm_network)'''
             lstm_network = tf.keras.layers.Dense(512,activation='relu')(lstm_network)
-            #lstm_network = tf.keras.layers.BatchNormalization()(lstm_network)
-            #lstm_network = tf.keras.layers.Dropout(0.5)(lstm_network)
             lstm_network = tf.keras.layers.Dense(64,activation='relu')(lstm_network)
             lstm_network = tf.keras.layers.Dropout(0.5)(lstm_network)    
             lstm_network = tf.keras.layers.Dense(n_classes,activation='softmax')(lstm_network)
