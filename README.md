@@ -1,5 +1,7 @@
 # A View NOT to Kill
-
+A good Bond reference is always due.  
+  
+  
 ## About
 <img src="media/result1.gif" align="right" width="430" height="280"> 
 
@@ -62,7 +64,7 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 ## Results
 <img align="right" src="media/result2.gif" width="450" height="290">  
 
-Ultimately, the system should be supplied with the video feed and we will be seeing a safety level for the given series of images. So for every moment in time, a safety flag is obtained. This can not only be employed in a self-driving car’s decision making system but also a manual car’s emergency protocol system to prevent extreme events. 
+Ultimately, the system should be supplied with the video feed and we will be getting a safety level for the given series of images. So for every moment in time, a safety flag is obtained. This can not only be employed in a self-driving car’s decision making system but also a manual car’s emergency protocol system to prevent extreme events. 
 
 
 The core of the project is to extract the Spatio-Temporal information and use it to understand our environment better for risk prediction, context understanding, action recognition, scene understanding and forecasting etc.
