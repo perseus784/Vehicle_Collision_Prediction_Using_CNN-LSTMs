@@ -14,7 +14,7 @@ The project combines CNNs and LSTMs to predict whether a vehicle is in a collisi
 * Carla 0.9.5 [[About Carla]](https://carla.org/)
 * [Carla Documentation and API usage](https://carla.readthedocs.io/en/latest/) 
 
-***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***  
+***Intricate details of how the project was built at each step is explained [here](https://medium.com/@ipaar3/building-a-deep-learning-model-to-judge-if-you-are-at-risk-1c96f90d666c), Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***  
 
 ## Data Collection 
 <img align="right" src="media/dataset_structure.png" width="300" height="200">
@@ -71,7 +71,7 @@ The core of the project is to extract the Spatio-Temporal information and use it
 
 *Full Video: https://www.youtube.com/watch?v=5E20U7b_4zQ* 
 
-***Intricate details of how the project was built at each step is explained here[], Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***
+***Intricate details of how the project was built at each step is explained [here](https://medium.com/@ipaar3/building-a-deep-learning-model-to-judge-if-you-are-at-risk-1c96f90d666c), Why a certain thing is used or a design choice is made is clearly discussed and I would highly recommend reading it if you want to go deep about any aspect of the project.***  
 
 Please raise an issue or contact me if you have any doubts.
 
