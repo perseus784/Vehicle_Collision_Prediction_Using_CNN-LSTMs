@@ -75,4 +75,10 @@ The core of the project is to extract the Spatio-Temporal information and use it
 
 Please raise an issue or contact me if you have any doubts.
 
-***Please Star if you like the project!***
+***Please Star if you like the project!***  
+
+**To Contact:**   
+
+[LinkedIn](https://www.linkedin.com/in/ipaar/) , <a href = "mailto: ipaar3@gmail.com">ipaar3@gmail.com</a>
+  
+  
