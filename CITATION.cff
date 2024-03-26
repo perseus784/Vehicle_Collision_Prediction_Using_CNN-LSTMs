@@ -1,0 +1,30 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Collision prediction using CNN-LSTMs
+message: >-
+  The project combines CNNs and LSTMs to predict whether a
+  vehicle is in a collision course using a series of images
+  moments before it happens.
+type: software
+authors:
+  - given-names: Paarvendhan
+    family-names: Puviyarasu
+    email: ipaar3@gmail.com
+identifiers:
+  - type: url
+    value: >-
+      https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs
+    description: github project link
+repository-code: >-
+  https://github.com/perseus784/Vehicle_Collision_Prediction_Using_CNN-LSTMs
+url: 'https://github.com'
+abstract: >-
+  The project combines CNNs and LSTMs to predict whether a
+  vehicle is in a collision course using a series of images
+  moments before it happens.
+keywords:
+  - CNN-LSTM
+  - Collision prediction
+license: GPL-3.0
